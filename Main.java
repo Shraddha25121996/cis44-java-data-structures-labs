@@ -9,47 +9,47 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
-        Playlist playlist = new Playlist();
         Scanner input = new Scanner(System.in);
+        TextEditor editor = new TextEditor();
+
         int choice;
+        String text;
 
         do {
-            System.out.println("\n--- Playlist Menu ---");
-            System.out.println("1. Add Song");
-            System.out.println("2. Display Playlist");
-            System.out.println("3. Play Next");
-            System.out.println("4. Remove Song");
+            System.out.println("\n--- Simple Text Editor ---");
+            System.out.println("1. Add Text");
+            System.out.println("2. Undo");
+            System.out.println("3. Redo");
+            System.out.println("4. Show Current Text");
             System.out.println("5. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.print("Choose an option: ");
             choice = input.nextInt();
-            input.nextLine();
+            input.nextLine(); // consume newline
 
             switch (choice) {
                 case 1:
-                    System.out.print("Enter song title: ");
-                    String title = input.nextLine();
-                    System.out.print("Enter artist: ");
-                    String artist = input.nextLine();
-                    playlist.addSong(new Song(title, artist));
+                    System.out.print("Enter text to add: ");
+                    text = input.nextLine();
+                    editor.add(text);
                     break;
                 case 2:
-                    playlist.displayPlaylist();
+                    editor.undo();
                     break;
                 case 3:
-                    playlist.playNext();
+                    editor.redo();
                     break;
                 case 4:
-                    System.out.print("Enter song title to remove: ");
-                    String removeTitle = input.nextLine();
-                    playlist.removeSong(removeTitle);
+                    editor.printCurrent();
                     break;
                 case 5:
-                    System.out.println("Exiting...");
+                    System.out.println("Exiting editor...");
                     break;
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.println("Invalid choice, please try again.");
             }
         } while (choice != 5);
+
+        input.close();
     }
 
 }
