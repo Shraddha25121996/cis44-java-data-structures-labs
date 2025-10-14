@@ -2,43 +2,54 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
+import java.util.Scanner;
 /**
  *
  * @author shraddhapatel
  */
 public class Main {
     public static void main(String[] args) {
-        // Create 2 random 2x2 matrices
-        Matrix m1 = new Matrix(2, 2);
-        Matrix m2 = new Matrix(2, 2);
+        Playlist playlist = new Playlist();
+        Scanner input = new Scanner(System.in);
+        int choice;
 
-        m1.populateRandom();
-        m2.populateRandom();
+        do {
+            System.out.println("\n--- Playlist Menu ---");
+            System.out.println("1. Add Song");
+            System.out.println("2. Display Playlist");
+            System.out.println("3. Play Next");
+            System.out.println("4. Remove Song");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            choice = input.nextInt();
+            input.nextLine();
 
-        System.out.println("Matrix 1:");
-        System.out.println(m1);
-
-        System.out.println("Matrix 2:");
-        System.out.println(m2);
-
-        // Addition
-        try {
-            Matrix sum = m1.add(m2);
-            System.out.println("Sum of Matrix 1 and Matrix 2:");
-            System.out.println(sum);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Addition Error: " + e.getMessage());
-        }
-
-        // Multiplication
-        try {
-            Matrix product = m1.multiply(m2);
-            System.out.println("Product of Matrix 1 and Matrix 2:");
-            System.out.println(product);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Multiplication Error: " + e.getMessage());
-        }
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter song title: ");
+                    String title = input.nextLine();
+                    System.out.print("Enter artist: ");
+                    String artist = input.nextLine();
+                    playlist.addSong(new Song(title, artist));
+                    break;
+                case 2:
+                    playlist.displayPlaylist();
+                    break;
+                case 3:
+                    playlist.playNext();
+                    break;
+                case 4:
+                    System.out.print("Enter song title to remove: ");
+                    String removeTitle = input.nextLine();
+                    playlist.removeSong(removeTitle);
+                    break;
+                case 5:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        } while (choice != 5);
     }
-}
 
+}
