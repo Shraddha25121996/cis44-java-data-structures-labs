@@ -53,9 +53,7 @@ public class DataStructures {
         return -1;
     }
 
-    // ==========================================
-    // 5. SORTING ALGORITHMS
-    // ==========================================
+   
     public static void bubbleSort(int[] arr) {
         int n = arr.length;
 
